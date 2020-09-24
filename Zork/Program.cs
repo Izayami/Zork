@@ -22,23 +22,14 @@ namespace Zork
                         break;
                 
                     case Commands.LOOK:
-                        outputString = "A rubber mat saying 'Welcome to Zork!.' lies by the door.";
+                        outputString = "This is an open field west of a white house, with a boarded front door.\nA rubber mat mat saying 'Welcome to Zork!' lies by the door.";
                         break;
 
                     case Commands.NORTH:
-                        outputString = "You moved NORTH.";
-                        break;
-
                     case Commands.SOUTH:
-                        outputString = "You moved South.";
-                        break;
-
                     case Commands.WEST:
-                        outputString = "You moved West.";
-                        break;
-
                     case Commands.EAST:
-                        outputString = "You moved East.";
+                        outputString = $"You moved {command}.";
                         break;
 
                     default:
