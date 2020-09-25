@@ -56,8 +56,10 @@ namespace Zork
         }
         private static Commands ToCommand(string commandString) => Enum.TryParse(commandString, true, out Commands result) ? result : Commands.UNKNOWN;
 
+        private static bool IsDirection(Commands command) => Directions.Contains(command);
         private static bool Move(Commands command)
         {
+            Assert.IsTrue(IsDirection(command), "Invalid direction.");
             bool isValidMove = true;
             switch(command)
             {
