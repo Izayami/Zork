@@ -25,8 +25,13 @@ namespace Zork
             while (command != Commands.QUIT)
             {
                 Console.WriteLine(CurrentRoom);
+                if (previousRoom != CurrentRoom)
+                {
+                    Console.WriteLine(CurrentRoom.Description);
+                    previousRoom = CurrentRoom;
+                }
                 Console.Write("> ");
-                command = ToCommand(Console.ReadLine().Trim());              
+                command = ToCommand(Console.ReadLine().Trim());
 
                 switch (command)
                 {
@@ -51,11 +56,6 @@ namespace Zork
                     default:
                         Console.WriteLine("Unknown Command.");
                         break;
-                }
-                if (previousRoom != CurrentRoom)
-                {
-                    Console.WriteLine(CurrentRoom.Description);
-                    previousRoom = CurrentRoom;
                 }
             }
         }
