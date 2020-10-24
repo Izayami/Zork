@@ -9,7 +9,10 @@ namespace Zork
         public World World { get; private set; }
 
         [JsonIgnore]
-        public Player Player { get, private set; }
+        public Player Player { get; private set; }
+
+        [JsonIgnore]
+        private bool IsRunning { get; set; }
 
         public Game(World world, Player player)
         {
@@ -36,7 +39,7 @@ namespace Zork
                 switch (command)
                 {
                     case Commands.QUIT:
-                        IsRunning - false;
+                        IsRunning = false;
                         break;
 
                     case Commands.LOOK:
@@ -44,9 +47,9 @@ namespace Zork
                         break;
 
                     case Commands.NORTH:
-                    case Commands.South:
-                    case Commands.East:
-                    case Commands.West:
+                    case Commands.SOUTH:
+                    case Commands.EAST:
+                    case Commands.WEST:
                         Directions direction = Enum.Parse<Directions>(command.ToString(), true);
                         if (Player.Move(direction) == false)
                         {
@@ -60,6 +63,14 @@ namespace Zork
                 }
             }
         }
+        public static Game Load (string filename)
+        {
+            Game game = JsonConvert.DeserializeObject<Game>(File.ReadAllText(filename));
+            game.Player = game.World.SpawnPlayer();
+
+            return game;
+        }
+        private static Commands ToCommand(string commandString) => (Enum.TryParse<Commands>(commandString, true, out Commands result) ? result : Commands.UNKNOWN);
     }
 }
 
