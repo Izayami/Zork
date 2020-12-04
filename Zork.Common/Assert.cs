@@ -15,5 +15,14 @@ namespace Zork
                 throw new Exception(message);
             }
         }
+
+        public static void ArgumentIsNotNull(object value, string paramName = null)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(paramName);
+            }
+        }
     }
 }
+
